@@ -1,0 +1,37 @@
+version: "1"
+
+package:
+  id: io.github.XmdvTool
+  name: XmdvTool
+  version: 9.0.0.1
+  kind: app
+  description: |
+    XmdvTool is an interactive data visualization toolkit for data anlyticsZ
+
+command:
+  - /opt/apps/io.github.XmdvTool/files/bin/XmdvTool
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/kaiyuzhao/XmdvTool.git
+    version: master
+    commit: d0be8511e1577995220a18e0bdbae601cd95727a
+  - kind: git
+    url: https://github.com/freeglut/freeglut.git
+    version: master
+    commit: 9ad320c1ad1a25558998ddfe47674511567fec57
+build: |
+  cd /project/linglong/sources/freeglut.git
+  mkdir build
+  cd build
+  cmake .. \
+        -DCMAKE_INSTALL_PREFIX=${PREFIX}
+  cmake --build . --target install
+  cd /project/linglong/sources/XmdvTool.git
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install

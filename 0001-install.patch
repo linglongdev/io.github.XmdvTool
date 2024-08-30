@@ -1,0 +1,58 @@
+From 7c8a0ffd178ed6d439f74d507d7dc48d9e7640c0 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 13 Aug 2024 14:06:24 +0800
+Subject: [PATCH] install
+
+---
+ XmdvTool.desktop | 11 +++++++++++
+ XmdvTool.pro     | 10 ++++++++++
+ 2 files changed, 21 insertions(+)
+ create mode 100644 XmdvTool.desktop
+
+diff --git a/XmdvTool.desktop b/XmdvTool.desktop
+new file mode 100644
+index 0000000..d07f952
+--- /dev/null
++++ b/XmdvTool.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=XmdvTool
++Name=XmdvTool
++Name[zh_CN]=XmdvTool
++Icon=imghdi
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=XmdvTool
++Version=1.0
+\ No newline at end of file
+diff --git a/XmdvTool.pro b/XmdvTool.pro
+index 9920ebe..f382348 100644
+--- a/XmdvTool.pro
++++ b/XmdvTool.pro
+@@ -290,6 +290,7 @@ SOURCES += src/color/ColorManager.cpp \
+     src/visualmap/VisualMapResult.cpp
+ FORMS += src/interface/glyph/glyphcustom.ui
+ RESOURCES += resource/XmdvTool.qrc
++INCLUDEPATH += $$PREFIX/include
+ INCLUDEPATH += src
+ LIBS+=-lGLU
+ 
+@@ -304,3 +305,12 @@ Debug:OBJECTS_DIR = debug/.obj
+ Debug:MOC_DIR = debug/.moc
+ Debug:RCC_DIR = debug/.rcc
+ Debug:UI_DIR = debug/.ui
++
++
++target.path = $$PREFIX/bin
++desktop.files = XmdvTool.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons
++icons.files = resource/icon/imghpa.png
++
++INSTALLS += target desktop icons
+\ No newline at end of file
+-- 
+2.43.4
+
